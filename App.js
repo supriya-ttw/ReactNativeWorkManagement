@@ -2,18 +2,24 @@
 import React from 'react';
 import Config from 'react-native-config';
 import { View, Text, Button, StyleSheet } from 'react-native';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import AppButton from './src/components/AppButton';
+import LoginScreen from './src/screens/LoginScreen';
+import RegistrationScreen from './src/screens/RegistrationScreen';
+import OtpScreen from './src/screens/OtpScreen';
 
 const Stack = createNativeStackNavigator();
-
 
 function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>WorkManagement</Text>
-      <Text style={styles.subtitle}>Welcome to your workspace!</Text>
+      <Text style={styles.subtitle}>
+        Welcome to your workspace!
+      </Text>
 
       {/* Temporary environment configuration check */}
       <Text>Environment: {Config.APP_ENV}</Text>
@@ -28,7 +34,6 @@ function HomeScreen({ navigation }) {
     </View>
   );
 }
-
 
 function TasksScreen({ navigation }) {
   return (
@@ -49,12 +54,31 @@ function TasksScreen({ navigation }) {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ title: 'Login' }}
+        />
+
+        <Stack.Screen
+          name="Registration"
+          component={RegistrationScreen}
+          options={{ title: 'Registration' }}
+        />
+
+        <Stack.Screen
+          name="OTP"
+          component={OtpScreen}
+          options={{ title: 'Verify OTP' }}
+        />
+
         <Stack.Screen
           name="Home"
           component={HomeScreen}
           options={{ title: 'Home' }}
         />
+
         <Stack.Screen
           name="Tasks"
           component={TasksScreen}
